@@ -1,0 +1,59 @@
+Database requirements: 
+1- A user can register: a user can only be a buyer.
+2- A user can place an order: each order has multiple product.
+3- A user can have multiple address and contact details: users address and phone number saved in the account.
+4- A user can have multiple Card info: users saved card in the account.
+5- A user can add product to a shopping chart: users add to the shopping cart the products they want.
+6- A user can add a review:a user can write review about a product.
+7- A user can add images to its review: each review can have images associated with it.
+----------------------------------------------------------------------------------
+
+8- A seller admin can add a product: this contains the details of the product.
+9- A product can be of a multiple categories:  it defines the category of a product like clothing, electronics etc.
+10- A Product can be carried by different carrier: the shipping service through which a product can be shipped.
+11- A seller can add images to its product: each product can have multiple images associated with it, so taken in separate table.
+
+-----------------------------------------------------------------------------------
+Relationships: m:n -> many to many/ 1:n -> one to many
+
+1) user-contact_details: 1:n
+2) user-card_info: 1:n 
+3) user-order: 1:n
+4) order-product: m:n
+5) user-review: 1:n
+6) user-shopping_cart: 1:1
+7) shopping_cart-product: m:n
+8) product-category: 1:n
+9) product-carrier: 1:n
+10) review-reviw_images: 1:n
+11) product-product_images: 1:n
+12) Order-card_info: 1:n
+13) Order-contact details: 1:n
+------------------------------------------------------------------------------------
+Relation schema:
+
+- 1: 1 binary relationship, in the total participation entity add the primary key of the other entity as the foreign key.
+- For 1: N binary relationship, add to the entity on the N side the primary key of the other entity as the foreign key. 
+- For M: N binary relationship, make a new entity with foreign key as the primary key of the two participating entities. Their combination forms the new primary key.
+
+1- product table > category_id 
+2- order table > user_id
+3- card inf > user_id
+4- reviews > user_id, product_id
+5- shopping cart > user_id
+6- contact details > user_id
+7- review images > review_id
+8- product images > prodcut_id
+9- product_shopping_cart which as product_id and buyer_id as foreign key
+10- product_order which as product_id and order_id as foreign key
+------------------------------------------------------------------------------------
+
+Notes on orders: 
+
+1- Place order: 
+iterate through the shopping cart of a user and remove each product. add removed product to an order table. while removing product sum up prices. fetch default address from the list of user addresses from contact-details. not to include certain products from the shopping car in the order table who's available unity is zero (in_stock bit is set to 0). To add an entry in the order table, containing details of the invoice (total price, total quantity of products in order, tax, shipping charge, card_details used for the order, delivery contact details used for the order). To invokes a trigger responsible for updating the available_units of each product being bought in that order.
+
+---------------------------------------------------------------------------------
+Notes on server: 
+- make sure you download node(npm in it)
+
