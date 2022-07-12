@@ -57,6 +57,9 @@ iterate through the shopping cart of a user and remove each product. add removed
 Notes on server: 
 - make sure you download node(npm in it)
 - in terminal npm init
-- npx tsc --init
+- npx tsc --init >> to iniate typescript
 - ts-node to run it from terminal directly
+- fix scripts in packagejson to run from terminal
+- to run any script npm run something
+- download npm i --save-dev @types/node to work typescript with node
 
